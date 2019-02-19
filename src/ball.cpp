@@ -108,5 +108,3 @@ bool operator==(Ball const& b1, Ball const& b2)
 bool operator!=(Ball const& b1, Ball const& b2) {
     return !(b1 == b2);
 }
-
-// KIARA'S CHANGE TO THE CODE
