@@ -24,7 +24,7 @@ Ball::Ball(Block const& paddle, Geometry const& geometry)
 ge211::Position Ball::top_left() const
 {
     // TODO: your code here
-    return {center_.x + radius_, center_.y + radius_};
+    return {center_.x - radius_, center_.y - radius_};
 
 }
 
@@ -73,7 +73,7 @@ bool Ball::hits_block(Block const& block) const
     int block_top = block.y;
     int block_bottom = block.y + block.height;
 
-    return !(ball_right < block_left || block_right < ball_left || ball_bottom < block_top && block_bottom < ball_top);
+    return !(ball_right < block_left || block_right < ball_left || ball_bottom < block_top || block_bottom < ball_top);
     // need to add more checks
 }
 
@@ -90,16 +90,22 @@ void Ball::reflect_horizontal()
 bool Ball::destroy_brick(std::vector<Block>& bricks) const
 {
     // TODO: your code here
-    foreach (Block brick, bricks)
+    for (Block brick : bricks) {
+        if(hits_block(brick)) {
+            std::swap(brick, bricks.back());
+            bricks.pop_back();
+            return true;
+        }
+    }
 }
 
 bool operator==(Ball const& b1, Ball const& b2)
 {
     // TODO: your code here
+    return b1.radius_ == b2.radius_ && b1.velocity_ == b2.velocity_ && b1.center_ == b2.center_ && b1.live_ == b2.live_;
 }
 
-bool operator!=(Ball const& b1, Ball const& b2)
-{
+bool operator!=(Ball const& b1, Ball const& b2) {
     return !(b1 == b2);
 }
 
