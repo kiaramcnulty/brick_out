@@ -56,18 +56,20 @@ void Ui::on_key(ge211::Key key)
 void Ui::on_frame(double)
 {
     // TODO: your code here
-    ge211::Random rand();
-
-
+    model_.update(ge211::Abstract_game::get_random().between(-model_.geometry_.max_boost, model_.geometry_.max_boost));
 }
 
 void Ui::on_mouse_up(ge211::Mouse_button, ge211::Position)
 {
     // TODO: your code here
+
+    // This does not feel like all I have to do ...
+    model_.launch();
 }
 
 void Ui::on_mouse_move(ge211::Position position)
 {
     // TODO: your code here
+    model_.paddle_to(position.x);
 }
 
