@@ -64,16 +64,7 @@ Ball Ball::next() const
 bool Ball::hits_block(Block const& block) const
 {
     // TODO: your code here
-    int ball_right = center_.x + radius_;
-    int ball_left = center_.x - radius_;
-    int block_left = block.x;
-    int block_right = block.x + block.width;
-    int ball_bottom = center_.y + radius_;
-    int ball_top = center_.y - radius_;
-    int block_top = block.y;
-    int block_bottom = block.y + block.height;
-
-    return !(ball_right < block_left || block_right < ball_left || ball_bottom < block_top || block_bottom < ball_top);
+    return !(center_.x + radius_ < block.x || block.x + block.width < center_.x - radius_ || center_.y + radius_ < block.y || block.y + block.height < center_.y - radius_);
     // need to add more checks
 }
 
