@@ -31,8 +31,7 @@ ge211::Position Ball::top_left() const
 bool Ball::hits_bottom(Geometry const& geometry) const
 {
     // TODO: your code here
-    int y_posn = center_.y + radius_;
-    return (y_posn > geometry.scene_dims.height);
+    return (center_.y + radius_ > geometry.scene_dims.height);
 
 
 }
@@ -40,16 +39,13 @@ bool Ball::hits_bottom(Geometry const& geometry) const
 bool Ball::hits_top(Geometry const&) const
 {
     // TODO: your code here
-    int y_posn = center_.y + radius_;
-    return (y_posn < 0);
+    return (center_.y + radius_ < 0);
 }
 
 bool Ball::hits_side(Geometry const& geometry) const
 {
     // TODO: your code here
-    int x_left = center_.x - radius_;
-    int x_right = center_.x + radius_;
-    return (x_left < 0 || x_right > geometry.scene_dims.width);
+    return (center_.x - radius_ < 0 || center_.x + radius_ > geometry.scene_dims.width);
 }
 
 Ball Ball::next() const
