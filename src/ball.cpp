@@ -8,8 +8,8 @@ static ge211::Position above_block(Block const& block,
 {
     // TODO: your code here
     ge211::Position posn = block.top_left();
-    posn.right_by(block.width/2);
-    posn.up_by(1 + geometry.ball_radius);
+    posn = posn.right_by(block.width/2);
+    posn = posn.up_by(1 + geometry.ball_radius);
     return posn;
 }
 

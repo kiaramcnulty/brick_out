@@ -39,6 +39,7 @@ void Model::paddle_to(int x)
         ball_ = Ball(paddle_, geometry_);
     }
 
+
 }
 
 // Updates the state of the game for one frame (usually 1/60 s).
