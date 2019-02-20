@@ -85,8 +85,31 @@ void Model::update(int boost)
     // TODO: your code here
     if (ball_.live_)
     {
+        if (ball_.hits_bottom(geometry_)) {
+            ball_.live_ = false;
+        }
+        else
+        {
+            Ball next = ball_.next();
+            if (next.hits_side(geometry_) && next.hits_top(geometry_))
+            {
+                next.velocity_.height *= -1;
+                next.velocity_.width *= -1;
+            }
+            else if (next.hits_top(geometry_))
+            {
+                next.velocity_.height *= -1;
+            }
+            else if (next.hits_side(geometry_))
+            {
+                next.velocity_.width *= -1;
+            }
 
 
+
+
+            //UPDATE BALL TO NEXT AT END OF THIS
+        }
 
     }
 
