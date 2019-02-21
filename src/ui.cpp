@@ -33,7 +33,7 @@ void Ui::draw(ge211::Sprite_set& sprites)
     // TODO: your code here
     sprites.add_sprite(ball_sprite_, model_.ball_.top_left());
     sprites.add_sprite(paddle_sprite_, {model_.paddle_.x, model_.paddle_.y});
-    for(size_t brick_index; brick_index < model_.bricks_.size(); brick_index++) {
+    for(size_t brick_index = 0; brick_index < model_.bricks_.size(); brick_index++) {
         sprites.add_sprite(brick_sprite_, model_.bricks_[brick_index].top_left());
     }
 }

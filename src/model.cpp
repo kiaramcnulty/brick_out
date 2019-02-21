@@ -17,10 +17,10 @@ Model::Model(Geometry const& geometry)
         for(int colIndex = 0; colIndex < cols; colIndex++) {
             ge211::Rectangle rec;
             rec.dimensions() = geometry_.brick_dims();
-            rec.x = rowIndex * (rec.width + geometry_.brick_spacing.width) + geometry_.side_margin;
-            rec.y = colIndex * (rec.height + geometry_.brick_spacing.height) + geometry_.top_margin;
+            rec.x = rowIndex * (geometry_.brick_dims().width + geometry_.brick_spacing.width) + geometry_.side_margin;
+            rec.y = colIndex * (geometry_.brick_dims().height + geometry_.brick_spacing.height) + geometry_.top_margin;
 
-            bricks.push_back(rec);
+            bricks_.push_back(rec);
         }
     }
 }
@@ -34,12 +34,9 @@ void Model::launch()
 void Model::paddle_to(int x)
 {
     // TODO: your code here
-    paddle_.x += x;
-    if(!ball_.live_) {
+    paddle_.x = x - paddle_.width/2;
+    if(!ball_.live_)
         ball_ = Ball(paddle_, geometry_);
-    }
-
-
 }
 
 void Model::update(int boost)
