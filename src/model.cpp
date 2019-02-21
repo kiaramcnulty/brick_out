@@ -1,6 +1,7 @@
 // YOU DEFINITELY NEED TO MODIFY THIS FILE.
 
 #include "model.h"
+#include <iostream>
 
 Model::Model(Geometry const& geometry)
         : geometry_(geometry)
@@ -10,13 +11,13 @@ Model::Model(Geometry const& geometry)
 {
     // TODO: your code here
 
-    int rows = geometry_.brick_rows;
-    int cols = geometry_.brick_cols;
-    std::vector<ge211::Rectangle> bricks;
-    for(int rowIndex = 0; rowIndex < rows; rowIndex++) {
-        for(int colIndex = 0; colIndex < cols; colIndex++) {
-            ge211::Rectangle rec;
-            rec.dimensions() = geometry_.brick_dims();
+    for(int rowIndex = 0; rowIndex < geometry_.brick_rows; rowIndex++) {
+        for(int colIndex = 0; colIndex < geometry_.brick_cols; colIndex++) {
+            Block rec;
+            rec.width = geometry_.brick_dims().width;
+            rec.height = geometry_.brick_dims().height;
+            std::cout << rec.width << std::endl;
+            std::cout << rec.height << std::endl;
             rec.x = rowIndex * (geometry_.brick_dims().width + geometry_.brick_spacing.width) + geometry_.side_margin;
             rec.y = colIndex * (geometry_.brick_dims().height + geometry_.brick_spacing.height) + geometry_.top_margin;
 
@@ -64,9 +65,7 @@ void Model::update(int boost)
 
             ball_ = next;
         }
-
     }
-
 }
 
 

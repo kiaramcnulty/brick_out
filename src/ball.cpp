@@ -71,8 +71,6 @@ bool Ball::hits_block(Block const& block) const
     int bb = block.y + block.height;
 
     return !(r < bl || br < l || bb < t || b < bt);
-
-    return !(bl < r || l < br || bb < t || bt < b);
     // need to add more checks
 }
 
@@ -89,9 +87,9 @@ void Ball::reflect_horizontal()
 bool Ball::destroy_brick(std::vector<Block>& bricks) const
 {
     // TODO: your code here
-    for (Block brick : bricks) {
-        if(hits_block(brick)) {
-            std::swap(brick, bricks.back());
+    for (size_t index = 0; index < bricks.size(); index++) {
+        if(hits_block(bricks[index])) {
+            std::swap(bricks[index], bricks[bricks.size() - 1]);
             bricks.pop_back();
             return true;
         }
