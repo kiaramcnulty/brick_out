@@ -59,6 +59,5 @@ TEST_CASE("Hit Block Contact Check") {
 }
 
 TEST_CASE("Rec Dim Test") {
-    ge211.
 }
 

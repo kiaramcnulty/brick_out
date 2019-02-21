@@ -16,8 +16,6 @@ Model::Model(Geometry const& geometry)
             Block rec;
             rec.width = geometry_.brick_dims().width;
             rec.height = geometry_.brick_dims().height;
-            std::cout << rec.width << std::endl;
-            std::cout << rec.height << std::endl;
             rec.x = rowIndex * (geometry_.brick_dims().width + geometry_.brick_spacing.width) + geometry_.side_margin;
             rec.y = colIndex * (geometry_.brick_dims().height + geometry_.brick_spacing.height) + geometry_.top_margin;
 
@@ -51,15 +49,15 @@ void Model::update(int boost)
         {
             Ball next = ball_.next();
             if ((next.hits_side(geometry_) && next.hits_top(geometry_)) || next.destroy_brick(bricks_)) {
-                next.velocity_.height *= -1;
-                next.velocity_.width *= -1;
+                next.reflect_vertical();
+                next.reflect_horizontal();
             }
             else if (next.hits_top(geometry_))
-                next.velocity_.height *= -1;
+                next.reflect_vertical();
             else if (next.hits_side(geometry_))
-                next.velocity_.width *= -1;
+                next.reflect_horizontal();
             else if (next.hits_block(paddle_)) {
-                next.velocity_.height *= -1;
+                next.reflect_vertical();
                 next.velocity_.width += boost;
             }
 
